@@ -1,4 +1,4 @@
-package com.suprun.bookmarkkeeper_api.domain;
+package com.suprun.bookmark_keeper_api.domain;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

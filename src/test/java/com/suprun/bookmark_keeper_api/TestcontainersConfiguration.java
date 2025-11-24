@@ -1,4 +1,4 @@
-package com.suprun.bookmarkkeeper_api;
+package com.suprun.bookmark_keeper_api;
 
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;

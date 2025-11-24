@@ -1,4 +1,4 @@
-package com.suprun.bookmarkkeeper_api;
+package com.suprun.bookmark_keeper_api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
