@@ -11,7 +11,7 @@
 	<groupId>com.suprun</groupId>
 	<artifactId>bookmarkkeeper-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>bookmarkkeeper-api</name>
+	<name>bookmark-keeper-api</name>
 	<description>Project with Spring Boot and Kubernetes</description>
 	<url/>
 	<licenses>
