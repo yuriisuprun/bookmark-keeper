@@ -15,7 +15,7 @@ public class BookmarkService {
 
     private final BookmarkRepository repository;
 
-    @Transactional(readOnly=true)
+    @Transactional(readOnly = true)
     private List<Bookmark> getBookmarks() {
         return repository.findAll();
     }
