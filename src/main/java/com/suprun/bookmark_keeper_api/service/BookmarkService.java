@@ -13,10 +13,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BookmarkService {
 
-    private final BookmarkRepository repository;
+    private final BookmarkRepository bookmarkRepository;
 
     @Transactional(readOnly = true)
     private List<Bookmark> getBookmarks() {
-        return repository.findAll();
+        return bookmarkRepository.findAll();
     }
 }
