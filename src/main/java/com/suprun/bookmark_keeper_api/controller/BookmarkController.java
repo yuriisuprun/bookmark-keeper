@@ -1,6 +1,6 @@
 package com.suprun.bookmark_keeper_api.controller;
 
-import com.suprun.bookmark_keeper_api.dto.BookmarksDto;
+import com.suprun.bookmark_keeper_api.dto.BookmarksDTO;
 import com.suprun.bookmark_keeper_api.service.BookmarkService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +17,7 @@ public class BookmarkController {
     private final BookmarkService bookmarkService;
 
     @GetMapping
-    public BookmarksDto getBookmarks(@RequestParam(name = "page", defaultValue = "1") Integer page) {
+    public BookmarksDTO getBookmarks(@RequestParam(name = "page", defaultValue = "1") Integer page) {
         return bookmarkService.getBookmarks(page);
     }
 }

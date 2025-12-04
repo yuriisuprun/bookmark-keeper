@@ -11,7 +11,7 @@ import java.time.Instant;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class BookmarkDto {
+public class BookmarkDTO {
 
     private Long id;
     private String title;
