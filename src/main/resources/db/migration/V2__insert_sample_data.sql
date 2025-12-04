@@ -1,0 +1,16 @@
+INSERT INTO bookmarks (title, url, created_at) VALUES
+  ('Oracle', 'https://blogs.oracle.com/java/', CURRENT_TIMESTAMP),
+  ('SpringBlog', 'https://spring.io/blog/', CURRENT_TIMESTAMP),
+  ('Quarkus', 'https://quarkus.io/', CURRENT_TIMESTAMP),
+  ('Micronaut', 'https://micronaut.io/', CURRENT_TIMESTAMP),
+  ('JOOQ', 'https://blog.jooq.org/', CURRENT_TIMESTAMP),
+  ('InRelationTo', 'https://in.relation.to/', CURRENT_TIMESTAMP),
+  ('Hibernate', 'https://hibernate.org/blog/', CURRENT_TIMESTAMP),
+  ('Jaxender', 'https://jaxenter.de/', CURRENT_TIMESTAMP),
+  ('Heise', 'https://www.heise.de/devops/', CURRENT_TIMESTAMP),
+  ('KubernetesDocs', 'https://kubernetes.io/docs/home/', CURRENT_TIMESTAMP),
+  ('Nodejs', 'https://nodejs.org/en/blog/', CURRENT_TIMESTAMP),
+  ('Infog', 'https://www.infoq.com/de/', CURRENT_TIMESTAMP),
+  ('Entwickler', 'https://entwickler.de/', CURRENT_TIMESTAMP),
+  ('ComputerWeekly', 'https://www.computerweekly.com/europe', CURRENT_TIMESTAMP),
+  ('Ubuntu', 'https://ubuntu.com/blog', CURRENT_TIMESTAMP);
