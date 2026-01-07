@@ -4,6 +4,8 @@ import com.suprun.bookmark_keeper_api.domain.Bookmark;
 import com.suprun.bookmark_keeper_api.repository.BookmarkRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
@@ -61,16 +63,22 @@ class BookmarkControllerTest {
         bookmarkRepository.saveAll(bookmarks);
     }
 
-    @Test
-    void shouldGetBookmarks() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/bookmarks"))
+    @ParameterizedTest
+    @CsvSource({
+            "1,15,2,1,true,false,true,false",
+            "2,15,2,2,false,true,false,true"
+    })
+    void shouldGetBookmarks(int pageNo, int totalElements, int totalPages, int currentPage,
+                            boolean isFirstPage, boolean isLastPage,
+                            boolean hasNextPage, boolean hasPreviousPage) throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/bookmarks?page=" + pageNo))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.totalElements", CoreMatchers.equalTo(15)))
-                .andExpect(jsonPath("$.totalPages", CoreMatchers.equalTo(2)))
-                .andExpect(jsonPath("$.currentPage", CoreMatchers.equalTo(1)))
-                .andExpect(jsonPath("$.isFirstPage", CoreMatchers.equalTo(true)))
-                .andExpect(jsonPath("$.isLastPage", CoreMatchers.equalTo(false)))
-                .andExpect(jsonPath("$.hasNextPage", CoreMatchers.equalTo(true)))
-                .andExpect(jsonPath("$.hasPreviousPage", CoreMatchers.equalTo(false)));
+                .andExpect(jsonPath("$.totalElements", CoreMatchers.equalTo(totalElements)))
+                .andExpect(jsonPath("$.totalPages", CoreMatchers.equalTo(totalPages)))
+                .andExpect(jsonPath("$.currentPage", CoreMatchers.equalTo(currentPage)))
+                .andExpect(jsonPath("$.isFirstPage", CoreMatchers.equalTo(isFirstPage)))
+                .andExpect(jsonPath("$.isLastPage", CoreMatchers.equalTo(isLastPage)))
+                .andExpect(jsonPath("$.hasNextPage", CoreMatchers.equalTo(hasNextPage)))
+                .andExpect(jsonPath("$.hasPreviousPage", CoreMatchers.equalTo(hasPreviousPage)));
     }
 }
