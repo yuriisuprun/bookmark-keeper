@@ -19,7 +19,7 @@ public class BookmarkController {
     @GetMapping
     public BookmarksDTO getBookmarks(
             @RequestParam(name = "page", defaultValue = "1") Integer page,
-            @RequestParam(name = "search", defaultValue = "") String query) {
+            @RequestParam(name = "query", defaultValue = "") String query) {
         if (query == null || query.trim().isEmpty()) {
             return bookmarkService.getBookmarks(page);
         }
