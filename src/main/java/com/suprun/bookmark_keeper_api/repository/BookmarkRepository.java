@@ -16,5 +16,6 @@ public interface BookmarkRepository extends JpaRepository<Bookmark, Long> {
     select new com.suprun.bookmark_keeper_api.dto.BookmarkDTO(b.id, b.title, b.url, b.createdAt) from Bookmark b 
     where lower(b.title) like lower(concat('%', :query, '%'))
     """)
-    Page<BookmarkDTO> searchBookmarks(String search, Pageable pageable);
+    Page<BookmarkDTO> searchBookmarks(String query, Pageable pageable);
 }
+
