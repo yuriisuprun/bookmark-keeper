@@ -1,0 +1,17 @@
+package com.suprun.bookmark_keeper_api.dto;
+
+import lombok.Getter;
+import lombok.Setter;
+
+import jakarta.validation.constraints.NotEmpty;
+
+@Setter
+@Getter
+public class CreateBookmarkRequest {
+
+    @NotEmpty(message = "Title should not be empty")
+    private String title;
+
+    @NotEmpty(message = "Url should not be empty")
+    private String url;
+}

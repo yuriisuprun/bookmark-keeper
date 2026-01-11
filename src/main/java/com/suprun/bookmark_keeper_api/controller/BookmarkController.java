@@ -1,12 +1,13 @@
 package com.suprun.bookmark_keeper_api.controller;
 
+import com.suprun.bookmark_keeper_api.dto.BookmarkDTO;
+import com.suprun.bookmark_keeper_api.dto.CreateBookmarkRequest;
 import com.suprun.bookmark_keeper_api.dto.BookmarksDTO;
 import com.suprun.bookmark_keeper_api.service.BookmarkService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -24,5 +25,11 @@ public class BookmarkController {
             return bookmarkService.getBookmarks(page);
         }
         return bookmarkService.searchBookmarks(query, page);
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.OK)
+    public BookmarkDTO createBookmark(@RequestBody @Valid CreateBookmarkRequest request) {
+        return bookmarkService.createBookmark(request);
     }
 }
