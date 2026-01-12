@@ -9,12 +9,16 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
 
 import org.hamcrest.CoreMatchers;
 
@@ -81,4 +85,24 @@ class BookmarkControllerTest {
                 .andExpect(jsonPath("$.hasNextPage", CoreMatchers.equalTo(hasNextPage)))
                 .andExpect(jsonPath("$.hasPreviousPage", CoreMatchers.equalTo(hasPreviousPage)));
     }
+
+    @Test
+    void shouldCreateBookmarkSuccessfully() throws Exception {
+        this.mockMvc.perform(
+                        post("/api/bookmarks")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content("""
+                    {
+                      "title": "Yurii's Blog",
+                      "url": "https://url.com"
+                    }
+                    """)
+                )
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.id", notNullValue()))
+                .andExpect(jsonPath("$.title", is("Yurii's Blog")))
+                .andExpect(jsonPath("$.url", is("https://url.com")));
+    }
+
+
 }

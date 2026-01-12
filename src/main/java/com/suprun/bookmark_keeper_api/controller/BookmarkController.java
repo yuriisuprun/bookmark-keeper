@@ -28,7 +28,7 @@ public class BookmarkController {
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     public BookmarkDTO createBookmark(@RequestBody @Valid CreateBookmarkRequest request) {
         return bookmarkService.createBookmark(request);
     }
