@@ -109,7 +109,7 @@ function App() {
         <div className="header-container">
           <div className="logo-section">
             <h1>Library</h1>
-            <p className="tagline">Manage your book collection</p>
+            <p className="tagline">Book collection manager</p>
           </div>
         </div>
       </header>
@@ -118,7 +118,7 @@ function App() {
         {/* Search Section */}
         <section className="search-section">
           <div className="section-container">
-            <h2>Search Books</h2>
+            <h2>Search books</h2>
             <form onSubmit={handleSearch} className="search-form">
               <div className="search-controls">
                 <input
@@ -153,7 +153,7 @@ function App() {
         {/* Add Book Section */}
         <section className="add-book-section">
           <div className="section-container">
-            <h2>Add New Book</h2>
+            <h2>Add new book</h2>
             <div className="form-group">
               <input
                 type="text"
