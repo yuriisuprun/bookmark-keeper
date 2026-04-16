@@ -111,12 +111,26 @@ function App() {
             <h1>Library</h1>
             <p className="tagline">Book collection manager</p>
           </div>
+          <nav className="main-nav">
+            <ul>
+              <li><a href="#home">Home</a></li>
+              <li><a href="#books">Browse Books</a></li>
+              <li><a href="#add">Add Book</a></li>
+            </ul>
+          </nav>
         </div>
       </header>
 
       <main className="app-main">
+        <section id="home" className="hero-section">
+          <div className="section-container">
+            <h2>Welcome to Your Personal Library</h2>
+            <p>Manage your book collection with ease. Search, add, and organize your favorite reads.</p>
+          </div>
+        </section>
+
         {/* Search Section */}
-        <section className="search-section">
+        <section id="books" className="search-section">
           <div className="section-container">
             <h2>Search books</h2>
             <form onSubmit={handleSearch} className="search-form">
@@ -151,7 +165,7 @@ function App() {
         </section>
 
         {/* Add Book Section */}
-        <section className="add-book-section">
+        <section id="add" className="add-book-section">
           <div className="section-container">
             <h2>Add new book</h2>
             <div className="form-group">
@@ -232,6 +246,19 @@ function App() {
           </div>
         </section>
       </main>
+
+      <footer className="app-footer">
+        <div className="footer-container">
+          <p>&copy; 2024 Library App. All rights reserved.</p>
+          <nav className="footer-nav">
+            <ul>
+              <li><a href="#privacy">Privacy Policy</a></li>
+              <li><a href="#terms">Terms of Service</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </nav>
+        </div>
+      </footer>
     </div>
   )
 }
