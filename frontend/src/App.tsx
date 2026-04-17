@@ -246,7 +246,7 @@ function App() {
         <section className="books-section">
           <div className="section-container">
             <div className="books-header">
-              <h2>Your Books</h2>
+              <h2>Available books</h2>
               {isSearching && <span className="results-count">{books.length} result{books.length !== 1 ? 's' : ''}</span>}
             </div>
             {books.length === 0 ? (
