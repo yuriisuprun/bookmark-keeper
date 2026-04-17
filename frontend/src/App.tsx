@@ -191,9 +191,9 @@ function App() {
           </div>
           <nav className="main-nav">
             <ul>
-              <li><a href="#home">Home</a></li>
-              <li><a href="#books">Browse Books</a></li>
-              <li><a href="#add" onClick={handleAddBookClick}>Add Book</a></li>
+              <li><a href="#home">HOME</a></li>
+              <li><a href="#books">AVAILABLE BOOKS</a></li>
+              <li><a href="#add" onClick={handleAddBookClick}>ADD BOOK</a></li>
             </ul>
           </nav>
         </div>
