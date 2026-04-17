@@ -2,17 +2,27 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import './App.css'
 
+type TargetAudience = 'CHILDREN' | 'YOUNG_ADULT' | 'ADULT' | 'ACADEMIC';
+
 interface Book {
   id?: number;
   title: string;
   author: string;
-  isbn: string;
-  publishedYear: number;
+  isbn?: string;
+  publishedYear?: number;
+  publisher?: string;
+  genre?: string;
+  targetAudience?: TargetAudience;
+  country?: string;
+  language?: string;
+  pageCount?: number;
+  description?: string;
+  coverImageUrl?: string;
 }
 
 function App() {
   const [books, setBooks] = useState<Book[]>([])
-  const [newBook, setNewBook] = useState<Book>({ title: '', author: '', isbn: '', publishedYear: 0 })
+  const [newBook, setNewBook] = useState<Book>({ title: '', author: '' })
   const [searchQuery, setSearchQuery] = useState('')
   const [isSearching, setIsSearching] = useState(false)
   const [searchType, setSearchType] = useState<'all' | 'title' | 'author' | 'isbn' | 'year'>('all')
@@ -86,9 +96,22 @@ function App() {
 
   const addBook = async () => {
     try {
-      await axios.post('http://localhost:8080/api/books', newBook)
+      const payload: Book = {
+        ...newBook,
+        isbn: newBook.isbn?.trim() || undefined,
+        publisher: newBook.publisher?.trim() || undefined,
+        genre: newBook.genre?.trim() || undefined,
+        country: newBook.country?.trim() || undefined,
+        language: newBook.language?.trim() || undefined,
+        description: newBook.description?.trim() || undefined,
+        coverImageUrl: newBook.coverImageUrl?.trim() || undefined,
+        pageCount: newBook.pageCount && newBook.pageCount > 0 ? newBook.pageCount : undefined,
+        publishedYear: typeof newBook.publishedYear === 'number' ? newBook.publishedYear : undefined,
+      }
+
+      await axios.post('http://localhost:8080/api/books', payload)
       fetchBooks()
-      setNewBook({ title: '', author: '', isbn: '', publishedYear: 0 })
+      setNewBook({ title: '', author: '' })
     } catch (error) {
       console.error('Error adding book:', error)
     }
@@ -186,16 +209,86 @@ function App() {
               <input
                 type="text"
                 placeholder="ISBN"
-                value={newBook.isbn}
+                value={newBook.isbn ?? ''}
                 onChange={(e) => setNewBook({ ...newBook, isbn: e.target.value })}
                 aria-label="ISBN"
               />
               <input
                 type="number"
                 placeholder="Published Year"
-                value={newBook.publishedYear}
-                onChange={(e) => setNewBook({ ...newBook, publishedYear: parseInt(e.target.value) || 0 })}
+                value={newBook.publishedYear ?? ''}
+                onChange={(e) => {
+                  const v = e.target.value.trim()
+                  setNewBook({ ...newBook, publishedYear: v ? parseInt(v, 10) : undefined })
+                }}
                 aria-label="Published year"
+              />
+              <input
+                type="text"
+                placeholder="Publisher"
+                value={newBook.publisher ?? ''}
+                onChange={(e) => setNewBook({ ...newBook, publisher: e.target.value })}
+                aria-label="Publisher"
+              />
+              <input
+                type="text"
+                placeholder="Genre"
+                value={newBook.genre ?? ''}
+                onChange={(e) => setNewBook({ ...newBook, genre: e.target.value })}
+                aria-label="Genre"
+              />
+              <select
+                value={newBook.targetAudience ?? ''}
+                onChange={(e) => {
+                  const v = e.target.value as TargetAudience | ''
+                  setNewBook({ ...newBook, targetAudience: v || undefined })
+                }}
+                aria-label="Target audience"
+              >
+                <option value="">Target audience (optional)</option>
+                <option value="CHILDREN">Children</option>
+                <option value="YOUNG_ADULT">Young adult</option>
+                <option value="ADULT">Adult</option>
+                <option value="ACADEMIC">Academic</option>
+              </select>
+              <input
+                type="text"
+                placeholder="Country (e.g., US, IT)"
+                value={newBook.country ?? ''}
+                onChange={(e) => setNewBook({ ...newBook, country: e.target.value })}
+                aria-label="Country"
+              />
+              <input
+                type="text"
+                placeholder="Language (e.g., en, it, en-US)"
+                value={newBook.language ?? ''}
+                onChange={(e) => setNewBook({ ...newBook, language: e.target.value })}
+                aria-label="Language"
+              />
+              <input
+                type="number"
+                placeholder="Number of pages"
+                value={newBook.pageCount ?? ''}
+                onChange={(e) => {
+                  const v = e.target.value.trim()
+                  setNewBook({ ...newBook, pageCount: v ? parseInt(v, 10) : undefined })
+                }}
+                aria-label="Number of pages"
+                min={1}
+              />
+              <input
+                type="text"
+                placeholder="Cover image URL"
+                value={newBook.coverImageUrl ?? ''}
+                onChange={(e) => setNewBook({ ...newBook, coverImageUrl: e.target.value })}
+                aria-label="Cover image URL"
+              />
+              <input
+                type="text"
+                placeholder="Short description"
+                value={newBook.description ?? ''}
+                onChange={(e) => setNewBook({ ...newBook, description: e.target.value })}
+                aria-label="Description"
               />
               <button onClick={addBook} className="add-btn">Add Book</button>
             </div>
@@ -224,11 +317,35 @@ function App() {
                         </div>
                         <div className="metadata-item">
                           <dt>ISBN</dt>
-                          <dd className="isbn-code">{book.isbn}</dd>
+                          <dd className="isbn-code">{book.isbn || '—'}</dd>
                         </div>
                         <div className="metadata-item">
                           <dt>Published</dt>
-                          <dd>{book.publishedYear}</dd>
+                          <dd>{typeof book.publishedYear === 'number' ? book.publishedYear : '—'}</dd>
+                        </div>
+                        <div className="metadata-item">
+                          <dt>Publisher</dt>
+                          <dd>{book.publisher || '—'}</dd>
+                        </div>
+                        <div className="metadata-item">
+                          <dt>Genre</dt>
+                          <dd>{book.genre || '—'}</dd>
+                        </div>
+                        <div className="metadata-item">
+                          <dt>Audience</dt>
+                          <dd>{book.targetAudience ? book.targetAudience.replace('_', ' ') : '—'}</dd>
+                        </div>
+                        <div className="metadata-item">
+                          <dt>Country</dt>
+                          <dd>{book.country || '—'}</dd>
+                        </div>
+                        <div className="metadata-item">
+                          <dt>Language</dt>
+                          <dd>{book.language || '—'}</dd>
+                        </div>
+                        <div className="metadata-item">
+                          <dt>Pages</dt>
+                          <dd>{typeof book.pageCount === 'number' ? book.pageCount : '—'}</dd>
                         </div>
                       </dl>
                     </div>
