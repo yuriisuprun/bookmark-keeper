@@ -8,10 +8,14 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "books")
@@ -37,9 +41,8 @@ public class Book {
     private String isbn;
 
     @Min(0)
+    @Column(name = "published_year")
     private Integer publishedYear;
-
-    public Book() {}
 
     // Optional metadata fields
     @Size(max = 255)
@@ -51,7 +54,7 @@ public class Book {
     private String genre;
 
     @Enumerated(EnumType.STRING)
-    @Column(length = 30)
+    @Column(name = "target_audience", length = 30)
     private TargetAudience targetAudience;
 
     // Prefer ISO-3166-1 alpha-2 if you want a standard code (e.g., "US", "IT"),
@@ -67,6 +70,7 @@ public class Book {
     private String language;
 
     @Min(1)
+    @Column(name = "page_count")
     private Integer pageCount;
 
     @Size(max = 2000)
@@ -74,14 +78,34 @@ public class Book {
     private String description;
 
     @Size(max = 500)
-    @Column(length = 500)
+    @Column(name = "cover_image_url", length = 500)
     private String coverImageUrl;
+
+    // Audit fields
+    @Column(name = "created_at", updatable = false)
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
+    public Book() {}
 
     public Book(String title, String author, String isbn, Integer publishedYear) {
         this.title = title;
         this.author = author;
         this.isbn = isbn;
         this.publishedYear = publishedYear;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+        updatedAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = LocalDateTime.now();
     }
 
     // Getters and Setters
@@ -187,5 +211,21 @@ public class Book {
 
     public void setCoverImageUrl(String coverImageUrl) {
         this.coverImageUrl = coverImageUrl;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

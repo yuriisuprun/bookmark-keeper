@@ -39,4 +39,9 @@ public interface BookRepository extends JpaRepository<Book, Long> {
            "LOWER(b.author) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
            "b.isbn LIKE CONCAT('%', :keyword, '%')")
     List<Book> searchByKeyword(@Param("keyword") String keyword);
+
+    /**
+     * Check if a book exists by title and author (for data loading)
+     */
+    boolean existsByTitleAndAuthor(String title, String author);
 }
