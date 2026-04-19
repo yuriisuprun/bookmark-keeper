@@ -99,8 +99,8 @@ public class DataLoaderService implements CommandLineRunner {
                     "Casa Editrice Contemporanea",
                     "Contemporary",
                     TargetAudience.YOUNG_ADULT,
-                    "Italy",
-                    "Italian",
+                    "",
+                    "",
                     280,
                     "Una narrazione dinamica e coinvolgente che esplora temi contemporanei attraverso dialoghi brillanti e situazioni inaspettate."
                 );
