@@ -458,8 +458,7 @@ function App() {
               <button 
                 className="modal-close-btn" 
                 onClick={closeAddBookModal}
-                aria-label="Close modal"
-              >
+                aria-label="Close modal">
                 ×
               </button>
             </div>
@@ -472,44 +471,35 @@ function App() {
                     value={newBook.title}
                     onChange={(e) => setNewBook({ ...newBook, title: e.target.value })}
                     aria-label="Book title"
-                    required
-                  />
-                  <input
-                    type="text"
+                    required/>
+                  <input type="text"
                     placeholder="Author Name *"
                     value={newBook.author}
                     onChange={(e) => setNewBook({ ...newBook, author: e.target.value })}
                     aria-label="Author name"
-                    required
-                  />
+                    required/>
                 </div>
                 <div className="form-row">
-                  <input
-                    type="text"
+                  <input type="text"
                     placeholder="ISBN"
                     value={newBook.isbn ?? ''}
                     onChange={(e) => setNewBook({ ...newBook, isbn: e.target.value })}
-                    aria-label="ISBN"
-                  />
-                  <input
-                    type="number"
+                    aria-label="ISBN"/>
+                  <input type="number"
                     placeholder="Published Year"
                     value={newBook.publishedYear ?? ''}
                     onChange={(e) => {
                       const v = e.target.value.trim()
                       setNewBook({ ...newBook, publishedYear: v ? parseInt(v, 10) : undefined })
                     }}
-                    aria-label="Published year"
-                  />
+                    aria-label="Published year"/>
                 </div>
                 <div className="form-row">
-                  <input
-                    type="text"
+                  <input type="text"
                     placeholder="Publisher"
                     value={newBook.publisher ?? ''}
                     onChange={(e) => setNewBook({ ...newBook, publisher: e.target.value })}
-                    aria-label="Publisher"
-                  />
+                    aria-label="Publisher"/>
                   <input
                     type="text"
                     placeholder="Genre"
