@@ -500,13 +500,11 @@ function App() {
                     value={newBook.publisher ?? ''}
                     onChange={(e) => setNewBook({ ...newBook, publisher: e.target.value })}
                     aria-label="Publisher"/>
-                  <input
-                    type="text"
+                  <input type="text"
                     placeholder="Genre"
                     value={newBook.genre ?? ''}
                     onChange={(e) => setNewBook({ ...newBook, genre: e.target.value })}
-                    aria-label="Genre"
-                  />
+                    aria-label="Genre"/>
                 </div>
                 <div className="form-row">
                   <select
@@ -515,32 +513,26 @@ function App() {
                       const v = e.target.value as TargetAudience | ''
                       setNewBook({ ...newBook, targetAudience: v || undefined })
                     }}
-                    aria-label="Target audience"
-                  >
+                    aria-label="Target audience">
                     <option value="">Target audience (optional)</option>
                     <option value="CHILDREN">Children</option>
                     <option value="YOUNG_ADULT">Young adult</option>
                     <option value="ADULT">Adult</option>
                     <option value="ACADEMIC">Academic</option>
                   </select>
-                  <input
-                    type="text"
+                  <input type="text"
                     placeholder="Country (e.g., US, IT)"
                     value={newBook.country ?? ''}
                     onChange={(e) => setNewBook({ ...newBook, country: e.target.value })}
-                    aria-label="Country"
-                  />
+                    aria-label="Country"/>
                 </div>
                 <div className="form-row">
-                  <input
-                    type="text"
+                  <input type="text"
                     placeholder="Language (e.g., en, it, en-US)"
                     value={newBook.language ?? ''}
                     onChange={(e) => setNewBook({ ...newBook, language: e.target.value })}
-                    aria-label="Language"
-                  />
-                  <input
-                    type="number"
+                    aria-label="Language"/>
+                  <input type="number"
                     placeholder="Number of pages"
                     value={newBook.pageCount ?? ''}
                     onChange={(e) => {
@@ -548,36 +540,27 @@ function App() {
                       setNewBook({ ...newBook, pageCount: v ? parseInt(v, 10) : undefined })
                     }}
                     aria-label="Number of pages"
-                    min={1}
-                  />
+                    min={1}/>
                 </div>
                 <div className="form-row full-width">
-                  <input
-                    type="text"
+                  <input type="text"
                     placeholder="Cover image URL"
                     value={newBook.coverImageUrl ?? ''}
                     onChange={(e) => setNewBook({ ...newBook, coverImageUrl: e.target.value })}
-                    aria-label="Cover image URL"
-                  />
+                    aria-label="Cover image URL"/>
                 </div>
                 <div className="form-row full-width">
-                  <textarea
-                    placeholder="Short description"
+                  <textarea placeholder="Short description"
                     value={newBook.description ?? ''}
                     onChange={(e) => setNewBook({ ...newBook, description: e.target.value })}
                     aria-label="Description"
-                    rows={3}
-                  />
+                    rows={3}/>
                 </div>
               </div>
             </div>
             <div className="modal-footer">
               <button onClick={closeAddBookModal} className="cancel-btn">Cancel</button>
-              <button 
-                onClick={addBook} 
-                className="add-btn"
-                disabled={!newBook.title.trim() || !newBook.author.trim()}
-              >
+              <button onClick={addBook} className="add-btn" disabled={!newBook.title.trim() || !newBook.author.trim()}>
                 Add Book
               </button>
             </div>
