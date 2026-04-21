@@ -250,21 +250,17 @@ function App() {
             <h2>Search books</h2>
             <form onSubmit={handleSearch} className="search-form">
               <div className="search-controls">
-                <input
-                  type="text"
+                <input type="text"
                   placeholder="Search by title, author, ISBN..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="search-input"
-                  aria-label="Search books"
-                />
+                  aria-label="Search books"/>
 
-                <select
-                  value={searchType}
+                <select value={searchType}
                   onChange={(e) => setSearchType(e.target.value as any)}
                   className="search-type-select"
-                  aria-label="Select search type"
-                >
+                  aria-label="Select search type">
                   <option value="all">All Fields</option>
                   <option value="title">Title</option>
                   <option value="author">Author</option>
@@ -309,13 +305,11 @@ function App() {
                       <tr key={book.id} className={editingBook?.id === book.id ? 'editing' : ''}>
                         <td>
                           {editingBook?.id === book.id ? (
-                            <input
-                              type="text"
+                            <input type="text"
                               value={editFormData.title}
                               onChange={(e) => setEditFormData({ ...editFormData, title: e.target.value })}
                               className="table-input"
-                              autoFocus
-                            />
+                              autoFocus/>
                           ) : (
                             <div className="book-title" title={book.title}>
                               {book.title}
@@ -324,57 +318,38 @@ function App() {
                         </td>
                         <td>
                           {editingBook?.id === book.id ? (
-                            <input
-                              type="text"
-                              value={editFormData.author}
+                            <input type="text" value={editFormData.author}
                               onChange={(e) => setEditFormData({ ...editFormData, author: e.target.value })}
-                              className="table-input"
-                            />
+                              className="table-input"/>
                           ) : (
-                            <div className="book-author" title={book.author}>
-                              {book.author}
-                            </div>
+                            <div className="book-author" title={book.author}>{book.author}</div>
                           )}
                         </td>
-                        <td>
-                          {editingBook?.id === book.id ? (
-                            <input
-                              type="number"
-                              value={editFormData.publishedYear ?? ''}
+                        <td>{editingBook?.id === book.id ? (
+                            <input type="number" value={editFormData.publishedYear ?? ''}
                               onChange={(e) => {
                                 const v = e.target.value.trim()
                                 setEditFormData({ ...editFormData, publishedYear: v ? parseInt(v, 10) : undefined })
                               }}
-                              className="table-input table-input-small"
-                            />
+                              className="table-input table-input-small"/>
                           ) : (
-                            <span className="book-year">
-                              {book.publishedYear || '—'}
-                            </span>
+                            <span className="book-year">{book.publishedYear || '—'}</span>
                           )}
                         </td>
-                        <td>
-                          {editingBook?.id === book.id ? (
-                            <input
-                              type="text"
-                              value={editFormData.genre ?? ''}
+                        <td>{editingBook?.id === book.id ? (
+                            <input type="text" value={editFormData.genre ?? ''}
                               onChange={(e) => setEditFormData({ ...editFormData, genre: e.target.value })}
-                              className="table-input"
-                            />
+                              className="table-input"/>
                           ) : (
                             <span className="book-genre" title={book.genre}>
                               {book.genre || '—'}
                             </span>
                           )}
                         </td>
-                        <td>
-                          {editingBook?.id === book.id ? (
-                            <input
-                              type="text"
-                              value={editFormData.publisher ?? ''}
+                        <td>{editingBook?.id === book.id ? (
+                            <input type="text" value={editFormData.publisher ?? ''}
                               onChange={(e) => setEditFormData({ ...editFormData, publisher: e.target.value })}
-                              className="table-input"
-                            />
+                              className="table-input"/>
                           ) : (
                             <span className="book-publisher" title={book.publisher}>
                               {book.publisher || '—'}
@@ -383,56 +358,37 @@ function App() {
                         </td>
                         <td>
                           {editingBook?.id === book.id ? (
-                            <input
-                              type="number"
-                              value={editFormData.pageCount ?? ''}
+                            <input type="number" value={editFormData.pageCount ?? ''}
                               onChange={(e) => {
                                 const v = e.target.value.trim()
                                 setEditFormData({ ...editFormData, pageCount: v ? parseInt(v, 10) : undefined })
                               }}
                               className="table-input table-input-small"
-                              min="1"
-                            />
+                              min="1"/>
                           ) : (
-                            <span className="book-pages">
-                              {book.pageCount || '—'}
-                            </span>
+                            <span className="book-pages">{book.pageCount || '—'}</span>
                           )}
                         </td>
                         <td>
                           <div className="action-buttons">
                             {editingBook?.id === book.id ? (
                               <>
-                                <button
-                                  onClick={saveEditBook}
-                                  className="save-btn"
+                                <button onClick={saveEditBook} className="save-btn"
                                   disabled={!editFormData.title.trim() || !editFormData.author.trim()}
-                                  title="Save changes"
-                                >
+                                  title="Save changes">
                                   ✓
                                 </button>
-                                <button
-                                  onClick={cancelEditBook}
-                                  className="cancel-edit-btn"
-                                  title="Cancel editing"
-                                >
+                                <button onClick={cancelEditBook} className="cancel-edit-btn" title="Cancel editing">
                                   ✕
                                 </button>
                               </>
                             ) : (
                               <>
-                                <button
-                                  onClick={() => startEditBook(book)}
-                                  className="edit-btn"
-                                  title="Edit book"
-                                >
+                                <button onClick={() => startEditBook(book)} className="edit-btn" title="Edit book">
                                   ✎
                                 </button>
-                                <button
-                                  onClick={() => book.id && deleteBook(book.id)}
-                                  className="delete-btn-table"
-                                  title="Delete book"
-                                >
+                                <button onClick={() => book.id && deleteBook(book.id)}
+                                  className="delete-btn-table" title="Delete book">
                                   🗑
                                 </button>
                               </>
